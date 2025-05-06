@@ -21,7 +21,7 @@ header {
 }
 
 header .logo img {
-    width: 120px; /* Størrelse på logoen */
+    width: 150px; /* Juster størrelsen etter behov */
     height: auto;
 }
 
