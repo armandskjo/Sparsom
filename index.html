@@ -1,30 +1,52 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinBuddy</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link til vår CSS-fil -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- Header -->
     <header>
-        <h1>Velkommen til FinBuddy</h1>
-        <p>Din personlige økonomiassistent</p>
+        <div class="logo">FinBuddy</div>
+        <nav>
+            <ul>
+                <li><a href="#">Hjem</a></li>
+                <li><a href="#">Om oss</a></li>
+                <li><a href="#">Les mer</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hovedinnhold -->
-    <main>
-        <h2>Hvordan kan vi hjelpe deg?</h2>
-        <p>Få oversikt over din økonomi, investeringer og mer!</p>
-        <button onclick="window.location.href='https://ditt-brukernavn.github.io/finbuddy/'">Les mer</button>
-    </main>
+    <!-- Main Section -->
+    <section class="hero">
+        <h1>Velkommen til FinBuddy!</h1>
+        <p>Din personlige økonomiassistent</p>
+        <a href="#" class="cta-btn">Kom i gang</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <h2>Budsjettverktøy</h2>
+            <p>Få kontroll over økonomien din med vårt enkle budsjettverktøy.</p>
+        </div>
+        <div class="feature">
+            <h2>AI-analyse</h2>
+            <p>Bruk kunstig intelligens for å forbedre din økonomiske situasjon.</p>
+        </div>
+        <div class="feature">
+            <h2>Sparingstips</h2>
+            <p>Få personlige sparingstips basert på dine mål.</p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 FinBuddy. Alle rettigheter reservert.</p>
     </footer>
-
 </body>
 </html>
