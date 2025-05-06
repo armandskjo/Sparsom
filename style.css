@@ -1,78 +1,105 @@
-/* Global styling */
+/* Global Settings */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+}
+
+h1, h2 {
+    font-family: 'Merriweather', serif;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
 }
 
 /* Header */
 header {
-    background-color: #4CAF50;
+    background-color: #2b3e50;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    font-weight: 500;
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+    background: url('hero-image.jpg') no-repeat center center/cover;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 80px 20px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
+.hero h1 {
+    font-size: 3em;
 }
 
-header p {
+.hero p {
     font-size: 1.2em;
 }
 
-/* Hovedinnhold */
-main {
-    padding: 20px;
-    text-align: center;
-}
-
-main h2 {
-    font-size: 2em;
-    color: #333;
-}
-
-main p {
-    font-size: 1.1em;
-    color: #555;
-}
-
-button {
+.cta-btn {
+    background-color: #FF7F50;
     padding: 15px 30px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #45a049;
+.cta-btn:hover {
+    background-color: #FF6347;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    background-color: #fff;
+}
+
+.feature {
+    text-align: center;
+    width: 30%;
+}
+
+.feature h2 {
+    font-size: 1.8em;
+    color: #2b3e50;
+}
+
+.feature p {
+    font-size: 1.2em;
+    color: #777;
 }
 
 /* Footer */
 footer {
-    text-align: center;
-    background-color: #4CAF50;
+    background-color: #2b3e50;
     color: white;
-    padding: 10px;
-}
-
-/* Responsiv design */
-@media screen and (max-width: 768px) {
-    header h1 {
-        font-size: 2em;
-    }
-
-    main h2 {
-        font-size: 1.5em;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px 20px;
-    }
+    padding: 20px;
+    text-align: center;
 }
