@@ -18,6 +18,12 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+    .chat-box img {
+      display: block;
+      margin: 0 auto 10px;
+      width: 120px;
+      height: auto;
+    }
     .chat-log {
       max-height: 400px;
       overflow-y: auto;
@@ -47,14 +53,28 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .back-link a {
+      color: #4e9cd9;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="chat-box">
-    <h2>Sparsom AI-assistent</h2>
+    <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
+    <h2 style="text-align: center;">Sparsom AI-assistent</h2>
     <div class="chat-log" id="chat-log"></div>
     <input type="text" id="user-input" placeholder="Spør meg om økonomi..." />
     <button onclick="sendMessage()">Send</button>
+    <div class="back-link">
+      <a href="index.html">← Tilbake til forsiden</a>
+    </div>
   </div>
 
   <script>
