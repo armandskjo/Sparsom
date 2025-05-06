@@ -1,19 +1,18 @@
-/* General Styling */
+/* Global Styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f7fc;
+    background-color: #f4f4f9;
     color: #333;
 }
 
+/* Header */
 header {
-    background-color: #2b3e50;
-    padding: 20px;
+    background-color: #2c3e50;
     color: white;
+    padding: 20px;
     text-align: center;
-    font-size: 1.2em;
 }
 
 header .logo {
@@ -22,8 +21,9 @@ header .logo {
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin-top: 10px;
 }
 
 nav ul li {
@@ -32,120 +32,81 @@ nav ul li {
 }
 
 nav ul li a {
-    text-decoration: none;
     color: white;
-    transition: color 0.3s;
+    text-decoration: none;
+    font-weight: 500;
 }
 
-nav ul li a:hover {
-    color: #f4a261;
-}
-
-/* Hero Section with Parallax Effect */
+/* Hero Section */
 .hero {
-    background: url('https://via.placeholder.com/1500x800') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
+    background-color: #3498db;
     color: white;
     text-align: center;
-    padding-top: 150px;
+    padding: 50px 20px;
+    border-bottom: 2px solid #2980b9;
 }
 
 .hero h1 {
-    font-size: 4em;
-    font-family: 'Merriweather', serif;
-    font-weight: bold;
+    font-size: 3em;
+    margin-bottom: 20px;
 }
 
-.hero p {
-    font-size: 1.5em;
-}
-
-.cta-btn {
-    background-color: #f4a261;
+.hero .cta-btn {
+    background-color: #2ecc71;
     color: white;
     padding: 15px 30px;
+    font-size: 1.2em;
     text-decoration: none;
-    font-weight: bold;
     border-radius: 5px;
-    margin-top: 20px;
-    display: inline-block;
-    transition: transform 0.3s ease-in-out;
+    transition: background-color 0.3s ease;
 }
 
-.cta-btn:hover {
-    transform: scale(1.1);
+.hero .cta-btn:hover {
+    background-color: #27ae60;
 }
 
 /* Features Section */
 .features {
     display: flex;
     justify-content: space-around;
-    padding: 60px 0;
-    background-color: #fff;
+    padding: 50px 20px;
+    background-color: #ecf0f1;
 }
 
 .feature {
-    text-align: center;
-    width: 30%;
+    background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.feature i {
-    font-size: 4em;
-    color: #f4a261;
-    margin-bottom: 20px;
+    width: 30%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .feature h2 {
-    font-size: 1.8em;
-    margin: 15px 0;
+    font-size: 1.5em;
+    color: #2c3e50;
 }
 
 .feature p {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    color: #7f8c8d;
 }
 
-/* Testimonials Section */
-.testimonials {
-    background: #f1f1f1;
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.testimonials h2 {
-    font-size: 2.5em;
-    margin-bottom: 40px;
-}
-
-.testimonial {
-    font-style: italic;
-    margin: 20px 0;
-}
-
-.testimonial p {
-    font-size: 1.2em;
+.feature:hover {
+    transform: scale(1.05);
 }
 
 /* Footer */
 footer {
-    background-color: #2b3e50;
+    background-color: #2c3e50;
     color: white;
     text-align: center;
     padding: 20px;
+    margin-top: 40px;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .features {
         flex-direction: column;
         align-items: center;
