@@ -1,8 +1,8 @@
 /* Global Settings */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #F9FAFB;
+    color: #111827;
     margin: 0;
     padding: 0;
 }
@@ -18,7 +18,7 @@ a {
 
 /* Header */
 header {
-    background-color: #2b3e50;
+    background-color: #1E3A8A;
     color: #fff;
     padding: 20px;
     display: flex;
@@ -29,6 +29,8 @@ header {
 header nav ul {
     list-style: none;
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 header nav ul li {
@@ -47,7 +49,7 @@ header .logo {
 
 /* Hero Section */
 .hero {
-    background: url('hero-image.jpg') no-repeat center center/cover;
+    background: linear-gradient(to right, #1E3A8A, #3B82F6);
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -62,20 +64,23 @@ header .logo {
 }
 
 .cta-btn {
-    background-color: #FF7F50;
+    background-color: #3B82F6;
     padding: 15px 30px;
     border-radius: 5px;
     font-weight: 500;
     transition: background-color 0.3s;
+    display: inline-block;
+    margin-top: 20px;
 }
 
 .cta-btn:hover {
-    background-color: #FF6347;
+    background-color: #60A5FA;
 }
 
 /* Features Section */
 .features {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     padding: 50px 20px;
     background-color: #fff;
@@ -83,22 +88,27 @@ header .logo {
 
 .feature {
     text-align: center;
-    width: 30%;
+    width: 300px;
+    margin: 20px;
+    background: #F3F4F6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .feature h2 {
     font-size: 1.8em;
-    color: #2b3e50;
+    color: #1E3A8A;
 }
 
 .feature p {
     font-size: 1.2em;
-    color: #777;
+    color: #4B5563;
 }
 
 /* Footer */
 footer {
-    background-color: #2b3e50;
+    background-color: #1E3A8A;
     color: white;
     padding: 20px;
     text-align: center;
