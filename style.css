@@ -11,20 +11,45 @@ h1, h2, p {
 }
 
 /* Header Styles */
+/* Header Styles */
 header {
     background-color: #4e9cd9; /* Lyseblå bakgrunn */
     color: white;
     padding: 20px 0; /* Gir litt plass rundt logoen */
     display: flex;
-    justify-content: center; /* Sentrerer logoen horisontalt */
-    align-items: center; /* Sentrerer logoen vertikalt */
+    flex-direction: column; /* Sentrerer logoen og menyen vertikalt */
+    justify-content: center; /* Sentrerer innholdet vertikalt */
+    align-items: center; /* Sentrerer innholdet horisontalt */
 }
 
+/* Justering av logoen */
 header .logo img {
     width: 120px; /* Juster størrelse på logoen */
     height: auto;
-    filter: brightness(0) invert(1); /* Endrer fargen til hvit (kan også bruke andre filtre) */
-    display: block; 
+}
+
+/* Navigasjonsmeny under logoen */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px; /* Litt plass mellom logo og meny */
+    text-align: center; /* Sentrerer menyen */
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px; /* Litt plass mellom menyen */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #FFD700; /* Gullfarge når du holder musen over */
 }
 
 /* Responsiv størrelse på mobil */
@@ -32,27 +57,12 @@ header .logo img {
     header .logo img {
         width: 100px; /* Juster logoen på mobil */
     }
-}
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
 }
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
 /* Hero Section */
 .hero {
     background-color: #ffffff;
