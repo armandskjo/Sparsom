@@ -1,93 +1,75 @@
-/* Global Settings */
+/* Global stil */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #F9FAFB;
-    color: #111827;
     margin: 0;
     padding: 0;
+    background-color: #F7F7F7;
 }
 
-h1, h2 {
-    font-family: 'Merriweather', serif;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-/* Header */
 header {
     background-color: #1E3A8A;
     color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: #fff;
-    font-weight: 500;
+    padding: 20px 0;
+    text-align: center;
 }
 
 header .logo {
-    font-size: 1.8em;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 500;
 }
 
-/* Hero Section */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .hero {
-    background: linear-gradient(to right, #1E3A8A, #3B82F6);
-    color: white;
+    background-color: #3B82F6;
+    color: #fff;
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
 }
 
 .hero h1 {
-    font-size: 3em;
+    font-size: 3rem;
+    margin: 0;
 }
 
 .hero p {
-    font-size: 1.2em;
+    font-size: 1.5rem;
 }
 
 .cta-btn {
-    background-color: #3B82F6;
+    background-color: #fff;
+    color: #3B82F6;
     padding: 15px 30px;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: background-color 0.3s;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    text-decoration: none;
     display: inline-block;
     margin-top: 20px;
 }
 
-.cta-btn:hover {
-    background-color: #60A5FA;
-}
-
-/* Features Section */
 .features {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     padding: 50px 20px;
-    background-color: #fff;
+    text-align: center;
+    gap: 20px;
 }
 
 .feature {
-    /* eksisterende stil... */
     text-align: center;
     width: 300px;
     margin: 20px;
@@ -104,20 +86,23 @@ header .logo {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
+
 .feature h2 {
-    font-size: 1.8em;
     color: #1E3A8A;
+    margin-bottom: 10px;
 }
 
 .feature p {
-    font-size: 1.2em;
-    color: #4B5563;
+    color: #111827;
 }
 
-/* Footer */
 footer {
     background-color: #1E3A8A;
-    color: white;
-    padding: 20px;
+    color: #fff;
+    padding: 20px 0;
     text-align: center;
+}
+
+footer p {
+    margin: 0;
 }
