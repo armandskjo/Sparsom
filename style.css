@@ -24,6 +24,7 @@ header .logo img {
     width: 120px; /* Juster størrelse på logoen */
     height: auto;
     filter: brightness(0) invert(1); /* Endrer fargen til hvit (kan også bruke andre filtre) */
+    display: block; 
 }
 
 /* Responsiv størrelse på mobil */
