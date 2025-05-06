@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start chat med Sparsom</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f8fc;
+      padding: 40px;
+    }
+    .chat-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .chat-log {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+    .chat-entry {
+      margin-bottom: 10px;
+    }
+    .chat-entry.user {
+      text-align: right;
+      font-weight: bold;
+    }
+    .chat-entry.bot {
+      text-align: left;
+    }
+    input[type="text"] {
+      width: 75%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4e9cd9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-box">
+    <h2>Sparsom AI-assistent</h2>
+    <div class="chat-log" id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Spør meg om økonomi..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const chatLog = document.getElementById("chat-log");
+      const userMessage = input.value;
+      if (!userMessage) return;
+
+      chatLog.innerHTML += `<div class='chat-entry user'>${userMessage}</div>`;
+      input.value = "";
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const data = await response.json();
+      const botReply = data.reply;
+
+      chatLog.innerHTML += `<div class='chat-entry bot'>${botReply}</div>`;
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+  </script>
+</body>
+</html>
