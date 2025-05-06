@@ -87,6 +87,7 @@ header .logo {
 }
 
 .feature {
+    /* eksisterende stil... */
     text-align: center;
     width: 300px;
     margin: 20px;
@@ -94,8 +95,15 @@ header .logo {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* fjerner understrek */
+    color: inherit; /* arver tekstfarge */
 }
 
+.feature:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 .feature h2 {
     font-size: 1.8em;
     color: #1E3A8A;
