@@ -21,7 +21,7 @@
       color: var(--text-dark);
       margin: 0;
       padding: 0;
-      transition: background 0.3s, color 0.3s;
+      transition: background-color 0.5s, color 0.5s;
     }
     body.dark {
       background-color: var(--bg-dark);
@@ -36,6 +36,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 30px;
       position: relative;
+      transition: background 0.5s;
     }
     body.dark .chat-box {
       background: #2a2a2a;
@@ -44,27 +45,23 @@
       display: block;
       margin: 0 auto 10px;
       width: 100px;
+      transition: filter 0.5s;
     }
-    .toggle-theme {
+    body:not(.dark) .chat-box img {
+      filter: brightness(0) saturate(100%) invert(94%) sepia(18%) saturate(600%) hue-rotate(172deg) brightness(94%) contrast(91%);
+    }
+    .toggle-theme, .clear-chat, .mute-toggle {
       position: absolute;
       top: 20px;
-      right: 60px;
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      color: inherit;
-    }
-    .clear-chat {
-      position: absolute;
-      top: 20px;
-      right: 20px;
       background: none;
       border: none;
       font-size: 18px;
       color: inherit;
       cursor: pointer;
     }
+    .toggle-theme { right: 90px; }
+    .clear-chat { right: 50px; }
+    .mute-toggle { right: 20px; }
     .chat-log {
       max-height: 400px;
       overflow-y: auto;
@@ -87,6 +84,7 @@
       padding: 10px 15px;
       border-radius: 16px;
       line-height: 1.4;
+      transition: background 0.3s;
     }
     .chat-entry.bot .chat-bubble {
       background-color: var(--bot-bubble);
@@ -191,6 +189,7 @@
   <div class="chat-box">
     <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
     <button class="clear-chat" onclick="clearChat()">🗑️</button>
+    <button class="mute-toggle" onclick="toggleMute()" id="mute-btn">🔊</button>
     <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
     <h2 style="text-align: center;">Sparsom AI-assistent</h2>
     <div class="chat-log" id="chat-log"></div>
@@ -217,13 +216,13 @@
 
   <script>
     let messages = [
-      {
-        role: "system",
-        content: "Du er Sparsom, en vennlig og hjelpsom norsk AI-assistent for personlig økonomi. Gi klare, konkrete og nyttige råd."
-      }
+      { role: "system", content: "Du er Sparsom, en vennlig og hjelpsom norsk AI-assistent for personlig økonomi. Gi klare, konkrete og nyttige råd." }
     ];
 
+    let isMuted = false;
+
     window.onload = () => {
+      if (!document.body.classList.contains('dark')) document.body.classList.add('light');
       typeBotIntro("Hei! Jeg er Sparsom. Hva vil du ha hjelp med i dag?");
     };
 
@@ -235,6 +234,11 @@
     function clearChat() {
       document.getElementById("chat-log").innerHTML = "";
       messages = [messages[0]];
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById("mute-btn").textContent = isMuted ? "🔇" : "🔊";
     }
 
     async function sendMessage() {
@@ -266,7 +270,7 @@
       messages.push({ role: "assistant", content: botReply });
 
       typeOut(botReply, chatLog);
-      speak(botReply);
+      if (!isMuted) speak(botReply);
     }
 
     function typeOut(text, chatLog) {
@@ -281,17 +285,17 @@
       botEntry.appendChild(icon);
       botEntry.appendChild(bubble);
       chatLog.appendChild(botEntry);
-      chatLog.scrollTop = chatLog.scrollHeight;
 
       const typing = setInterval(() => {
         if (i < text.length) {
           bubble.textContent += text.charAt(i);
-          chatLog.scrollTop = chatLog.scrollHeight;
           i++;
+          chatLog.scrollTop = chatLog.scrollHeight;
         } else {
           clearInterval(typing);
+          chatLog.scrollTop = chatLog.scrollHeight;
         }
-      }, 10);
+      }, 2);
     }
 
     function typeBotIntro(text) {
@@ -312,11 +316,13 @@
         if (i < text.length) {
           bubble.textContent += text.charAt(i);
           i++;
+          chatLog.scrollTop = chatLog.scrollHeight;
         } else {
           clearInterval(typing);
-          speak(text);
+          chatLog.scrollTop = chatLog.scrollHeight;
+          if (!isMuted) speak(text);
         }
-      }, 20);
+      }, 10);
     }
 
     function speak(text) {
@@ -329,6 +335,7 @@
 
     function toggleTheme() {
       document.body.classList.toggle("dark");
+      document.body.classList.toggle("light");
     }
   </script>
 </body>
