@@ -8,20 +8,28 @@
   <style>
     :root {
       --primary: #4e9cd9;
-      --light: #f4f8fc;
-      --dark: #1e1e1e;
+      --light-bg: #f4f8fc;
+      --dark-bg: #1e1e1e;
+      --light-text: #333;
+      --dark-text: #eee;
     }
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom right, #e9f1fa, #ffffff);
-      color: #333;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      transition: background 0.4s, color 0.4s;
+    }
+    body.dark {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
     }
     header {
       background: var(--primary);
       color: white;
       text-align: center;
       padding: 60px 20px;
+      position: relative;
     }
     header img {
       width: 100px;
@@ -33,6 +41,27 @@
     }
     header p {
       font-size: 1.2rem;
+    }
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .hero-video {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .hero-video video {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
     .cta {
       text-align: center;
@@ -50,7 +79,7 @@
     .cta a:hover {
       background: #357bb8;
     }
-    .steps {
+    .steps, .faq {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -58,19 +87,29 @@
       padding: 40px 20px;
       background: white;
     }
-    .step {
+    body.dark .steps, body.dark .faq {
+      background: #222;
+    }
+    .step, .faq-item {
       max-width: 300px;
-      text-align: center;
+      background: #f9fbfe;
       padding: 20px;
       border-radius: 12px;
-      background: #f9fbfe;
+      text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
     }
-    .step h3 {
-      margin-top: 10px;
+    body.dark .step, body.dark .faq-item {
+      background: #333;
+      color: white;
+    }
+    .step:hover, .faq-item:hover {
+      transform: translateY(-5px);
+    }
+    .step h3, .faq-item h4 {
       color: var(--primary);
     }
-    .notify {
+    .notify, .tips {
       text-align: center;
       padding: 40px 20px;
     }
@@ -89,6 +128,16 @@
       margin-left: 10px;
       cursor: pointer;
     }
+    .app-preview {
+      display: flex;
+      justify-content: center;
+      padding: 40px 10px;
+    }
+    .app-preview img {
+      width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
     footer {
       background: var(--primary);
       color: white;
@@ -97,7 +146,7 @@
       font-size: 0.9rem;
     }
     @media (max-width: 768px) {
-      .steps {
+      .steps, .faq {
         flex-direction: column;
       }
     }
@@ -105,9 +154,16 @@
 </head>
 <body>
   <header>
+    <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
     <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
     <h1>Sparsom</h1>
     <p>Økonomi gjort enkelt – med AI på norsk</p>
+    <div class="hero-video">
+      <video autoplay muted loop playsinline>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Din nettleser støtter ikke video.
+      </video>
+    </div>
   </header>
 
   <section class="cta">
@@ -140,8 +196,38 @@
     </form>
   </section>
 
+  <section class="app-preview">
+    <img src="https://via.placeholder.com/250x500.png?text=Sparsom+App+Preview" alt="App preview">
+  </section>
+
+  <section class="tips">
+    <h2>Ukens sparetips</h2>
+    <p>Ta med matpakke 3 dager i uka, og spar 800 kr i måneden!</p>
+  </section>
+
+  <section class="faq">
+    <div class="faq-item">
+      <h4>Er Sparsom gratis å bruke?</h4>
+      <p>Ja! Grunnfunksjonene er gratis. Vi tilbyr premium senere.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Hvordan fungerer AI-assistenten?</h4>
+      <p>Den bruker OpenAI sin teknologi og gir deg svar på norsk.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Hva skjer med dataene mine?</h4>
+      <p>Vi lagrer ikke sensitiv informasjon. Du er trygg hos oss.</p>
+    </div>
+  </section>
+
   <footer>
     &copy; 2025 Sparsom. Alle rettigheter reservert.
   </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
 </body>
 </html>
