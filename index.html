@@ -1,62 +1,56 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sparsom – Økonomiassistenten din</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparsom – Din AI-økonomiassistent</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #4e9cd9;
+      --light: #f4f8fc;
+      --dark: #1e1e1e;
+    }
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #e6f0fa, #fefefe);
+      background: linear-gradient(to bottom right, #e9f1fa, #ffffff);
       color: #333;
     }
     header {
-      background-color: #74B3E7;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    header img {
-      width: 100px;
-      margin-bottom: 15px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+      background: var(--primary);
       color: white;
-    }
-    header p {
-      color: white;
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-    .cta-section {
       text-align: center;
       padding: 60px 20px;
     }
-    .cta-section h2 {
-      font-size: 2rem;
+    header img {
+      width: 100px;
       margin-bottom: 10px;
     }
-    .cta-section p {
-      font-size: 1.1rem;
-      margin-bottom: 20px;
+    header h1 {
+      margin: 10px 0;
+      font-size: 2.5rem;
     }
-    .cta-section a {
-      padding: 12px 25px;
-      background-color: #4e9cd9;
+    header p {
+      font-size: 1.2rem;
+    }
+    .cta {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .cta a {
+      padding: 12px 30px;
+      background: var(--primary);
       color: white;
       text-decoration: none;
-      border-radius: 6px;
       font-weight: bold;
+      border-radius: 8px;
       transition: background 0.3s;
     }
-    .cta-section a:hover {
-      background-color: #357bb8;
+    .cta a:hover {
+      background: #357bb8;
     }
-    .features {
+    .steps {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -64,63 +58,86 @@
       padding: 40px 20px;
       background: white;
     }
-    .feature {
+    .step {
       max-width: 300px;
       text-align: center;
       padding: 20px;
-      background-color: #f7faff;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
+      background: #f9fbfe;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    .feature:hover {
-      transform: translateY(-5px);
+    .step h3 {
+      margin-top: 10px;
+      color: var(--primary);
     }
-    .feature h3 {
-      margin-top: 0;
-      color: #4e9cd9;
+    .notify {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .notify input {
+      padding: 10px;
+      width: 240px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .notify button {
+      padding: 10px 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-left: 10px;
+      cursor: pointer;
     }
     footer {
-      background-color: #74B3E7;
+      background: var(--primary);
       color: white;
       text-align: center;
-      padding: 25px 10px;
+      padding: 20px 10px;
       font-size: 0.9rem;
     }
     @media (max-width: 768px) {
-      .features {
+      .steps {
         flex-direction: column;
-        align-items: center;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom Logo">
+    <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
     <h1>Sparsom</h1>
-    <p>Din AI-drevne økonomiassistent</p>
+    <p>Økonomi gjort enkelt – med AI på norsk</p>
   </header>
 
-  <section class="cta-section">
-    <h2>Få kontroll på økonomien</h2>
-    <p>Start en samtale med vår AI og få tilpassede råd med én gang</p>
-    <a href="ai.html">Start chat med Sparsom</a>
+  <section class="cta">
+    <h2>Start chat med AI-assistenten nå</h2>
+    <p>Få hjelp til å spare, budsjettere og forstå økonomien din.</p>
+    <a href="ai.html">Start chat</a>
   </section>
 
-  <section class="features">
-    <div class="feature">
-      <h3>Smart budsjett</h3>
-      <p>Enkel oversikt over inntekter og utgifter. Se hva du faktisk bruker penger på.</p>
+  <section class="steps">
+    <div class="step">
+      <h3>1. Spør AI-en</h3>
+      <p>Still spørsmål om sparing, budsjett eller økonomi.</p>
     </div>
-    <div class="feature">
-      <h3>AI-råd</h3>
-      <p>Få konkrete tips til å spare mer og bruke smartere – tilpasset deg.</p>
+    <div class="step">
+      <h3>2. Få råd</h3>
+      <p>AI-en gir deg tilpassede, konkrete økonomiske tips.</p>
     </div>
-    <div class="feature">
-      <h3>Målrettet sparing</h3>
-      <p>Sett mål, få varsler og følg fremdriften din automatisk.</p>
+    <div class="step">
+      <h3>3. Nå målene dine</h3>
+      <p>Følg opp sparing og mål – og få hjelp underveis.</p>
     </div>
+  </section>
+
+  <section class="notify">
+    <h2>Appen kommer snart!</h2>
+    <p>Få beskjed når mobilappen er klar for nedlasting.</p>
+    <form action="https://formspree.io/f/yourformid" method="POST">
+      <input type="email" name="email" placeholder="Din e-postadresse" required>
+      <button type="submit">Varsle meg</button>
+    </form>
   </section>
 
   <footer>
