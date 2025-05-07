@@ -28,12 +28,13 @@
       color: var(--text-light);
     }
     .chat-box {
-      max-width: 600px;
+      max-width: 800px;
+      min-height: 600px;
       margin: 40px auto;
       background: white;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 20px;
+      padding: 30px;
       position: relative;
     }
     body.dark .chat-box {
@@ -47,12 +48,22 @@
     .toggle-theme {
       position: absolute;
       top: 20px;
-      right: 20px;
+      right: 60px;
       background: none;
       border: none;
       font-size: 20px;
       cursor: pointer;
       color: inherit;
+    }
+    .clear-chat {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: inherit;
+      cursor: pointer;
     }
     .chat-log {
       max-height: 400px;
@@ -114,39 +125,93 @@
       border: 1px solid #ccc;
       font-size: 16px;
     }
-    button {
-      padding: 10px 15px;
-      background-color: var(--primary);
-      color: white;
+    .send-btn {
+      background-color: #4e9cd9;
       border: none;
-      border-radius: 5px;
-      font-weight: bold;
+      border-radius: 50%;
+      padding: 12px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .send-btn:hover {
+      background-color: #357bb8;
+      transform: scale(1.1);
+    }
+    .send-btn svg {
+      width: 20px;
+      height: 20px;
     }
     .back-link {
       text-align: center;
       margin-top: 25px;
     }
-    .back-link a {
-      color: var(--primary);
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #4e9cd9;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
+      transition: transform 0.25s ease, background-color 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: #357bb8;
+      transform: translateY(-3px);
+    }
+    .back-btn .icon {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+    .back-btn:hover .icon {
+      transform: rotate(-10deg) scale(1.1);
+    }
+    .suggestions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .suggestions button {
+      background-color: #e0efff;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="chat-box">
     <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <button class="clear-chat" onclick="clearChat()">🗑️</button>
     <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
     <h2 style="text-align: center;">Sparsom AI-assistent</h2>
     <div class="chat-log" id="chat-log"></div>
     <div id="typing-indicator" class="typing" style="display:none;">🤖 Sparsom skriver...</div>
+    <div class="suggestions" id="suggestions">
+      <button onclick="useSuggestion('Hvordan kan jeg spare 1000 kr i måneden?')">Hvordan kan jeg spare 1000 kr i måneden?</button>
+      <button onclick="useSuggestion('Lag et budsjett for en student')">Lag et budsjett for en student</button>
+      <button onclick="useSuggestion('Hva bør jeg gjøre med kredittkortgjeld?')">Hva bør jeg gjøre med kredittkortgjeld?</button>
+    </div>
     <div class="input-area">
       <input type="text" id="user-input" placeholder="Spør meg om økonomi..." />
-      <button onclick="sendMessage()">Send</button>
+      <button onclick="sendMessage()" class="send-btn" aria-label="Send melding">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="white">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+        </svg>
+      </button>
     </div>
     <div class="back-link">
-      <a href="index.html">← Tilbake til forsiden</a>
+      <a href="index.html" class="back-btn">
+        <span class="icon">🏠</span> Tilbake til forsiden
+      </a>
     </div>
   </div>
 
@@ -157,6 +222,20 @@
         content: "Du er Sparsom, en vennlig og hjelpsom norsk AI-assistent for personlig økonomi. Gi klare, konkrete og nyttige råd."
       }
     ];
+
+    window.onload = () => {
+      typeBotIntro("Hei! Jeg er Sparsom. Hva vil du ha hjelp med i dag?");
+    };
+
+    function useSuggestion(text) {
+      document.getElementById("user-input").value = text;
+      sendMessage();
+    }
+
+    function clearChat() {
+      document.getElementById("chat-log").innerHTML = "";
+      messages = [messages[0]];
+    }
 
     async function sendMessage() {
       const input = document.getElementById("user-input");
@@ -187,6 +266,7 @@
       messages.push({ role: "assistant", content: botReply });
 
       typeOut(botReply, chatLog);
+      speak(botReply);
     }
 
     function typeOut(text, chatLog) {
@@ -212,6 +292,39 @@
           clearInterval(typing);
         }
       }, 10);
+    }
+
+    function typeBotIntro(text) {
+      const chatLog = document.getElementById("chat-log");
+      let i = 0;
+      const botEntry = document.createElement("div");
+      botEntry.className = "chat-entry bot";
+      const icon = document.createElement("div");
+      icon.className = "icon";
+      icon.textContent = "🤖";
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+      botEntry.appendChild(icon);
+      botEntry.appendChild(bubble);
+      chatLog.appendChild(botEntry);
+
+      const typing = setInterval(() => {
+        if (i < text.length) {
+          bubble.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typing);
+          speak(text);
+        }
+      }, 20);
+    }
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'no-NO';
+        speechSynthesis.speak(utterance);
+      }
     }
 
     function toggleTheme() {
