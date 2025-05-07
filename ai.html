@@ -3,75 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Start chat med Sparsom</title>
+  <title>Sparsom AI-assistent</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-light: #f4f8fc;
+      --bg-dark: #1e1e1e;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --primary: #4e9cd9;
+      --bot-bubble: #e2ecf7;
+      --user-bubble: #d0ebff;
+    }
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #f4f8fc;
-      padding: 40px;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
       margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
     }
     .chat-box {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 40px auto;
       background: white;
-      padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      position: relative;
+    }
+    body.dark .chat-box {
+      background: #2a2a2a;
     }
     .chat-box img {
       display: block;
       margin: 0 auto 10px;
       width: 100px;
     }
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: inherit;
+    }
     .chat-log {
       max-height: 400px;
       overflow-y: auto;
-      margin-bottom: 15px;
       padding: 10px;
-      background: #f0f4f8;
-      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .chat-entry {
-      margin-bottom: 10px;
-      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
     }
     .chat-entry.user {
-      text-align: right;
-      font-weight: bold;
-      color: #333;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
     }
-    .chat-entry.bot {
-      text-align: left;
-      color: #333;
+    .chat-bubble {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 16px;
+      line-height: 1.4;
+    }
+    .chat-entry.bot .chat-bubble {
+      background-color: var(--bot-bubble);
+      border-top-left-radius: 0;
+    }
+    .chat-entry.user .chat-bubble {
+      background-color: var(--user-bubble);
+      border-top-right-radius: 0;
+    }
+    body.dark .chat-entry.bot .chat-bubble {
+      background-color: #444;
+      color: #fff;
+    }
+    body.dark .chat-entry.user .chat-bubble {
+      background-color: #555;
+      color: #fff;
+    }
+    .chat-entry .icon {
+      font-size: 20px;
+      margin-top: 4px;
     }
     .typing {
       font-style: italic;
       color: #888;
-      margin-bottom: 10px;
+      margin-left: 5px;
+    }
+    .input-area {
+      display: flex;
+      padding-top: 10px;
+      gap: 10px;
     }
     input[type="text"] {
-      width: 70%;
+      flex: 1;
       padding: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      font-size: 16px;
     }
     button {
       padding: 10px 15px;
-      background-color: #4e9cd9;
+      background-color: var(--primary);
       color: white;
       border: none;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
     .back-link {
-      display: block;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 25px;
     }
     .back-link a {
-      color: #4e9cd9;
+      color: var(--primary);
       text-decoration: none;
       font-weight: bold;
     }
@@ -79,12 +136,15 @@
 </head>
 <body>
   <div class="chat-box">
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
     <img src="https://raw.githubusercontent.com/armandskjo/Sparsom/main/sparsom_logo_full.png" alt="Sparsom logo">
     <h2 style="text-align: center;">Sparsom AI-assistent</h2>
     <div class="chat-log" id="chat-log"></div>
-    <div id="typing-indicator" class="typing" style="display:none;">Sparsom skriver...</div>
-    <input type="text" id="user-input" placeholder="Spør meg om økonomi..." />
-    <button onclick="sendMessage()">Send</button>
+    <div id="typing-indicator" class="typing" style="display:none;">🤖 Sparsom skriver...</div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Spør meg om økonomi..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
     <div class="back-link">
       <a href="index.html">← Tilbake til forsiden</a>
     </div>
@@ -94,7 +154,7 @@
     let messages = [
       {
         role: "system",
-        content: "Du er Sparsom, en vennlig og hjelpsom norsk AI-assistent for personlig økonomi. Svar tydelig og konkret."
+        content: "Du er Sparsom, en vennlig og hjelpsom norsk AI-assistent for personlig økonomi. Gi klare, konkrete og nyttige råd."
       }
     ];
 
@@ -105,23 +165,25 @@
       const userMessage = input.value.trim();
       if (!userMessage) return;
 
-      chatLog.innerHTML += `<div class='chat-entry user'>${userMessage}</div>`;
+      const userEntry = document.createElement("div");
+      userEntry.className = "chat-entry user";
+      userEntry.innerHTML = `<div class='icon'>👤</div><div class='chat-bubble'>${userMessage}</div>`;
+      chatLog.appendChild(userEntry);
+
       messages.push({ role: "user", content: userMessage });
       input.value = "";
       typingIndicator.style.display = "block";
+      chatLog.scrollTop = chatLog.scrollHeight;
 
       const response = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: messages }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: messages })
       });
 
       const data = await response.json();
       const botReply = data.reply;
       typingIndicator.style.display = "none";
-
       messages.push({ role: "assistant", content: botReply });
 
       typeOut(botReply, chatLog);
@@ -129,19 +191,31 @@
 
     function typeOut(text, chatLog) {
       let i = 0;
-      const div = document.createElement("div");
-      div.className = "chat-entry bot";
-      chatLog.appendChild(div);
+      const botEntry = document.createElement("div");
+      botEntry.className = "chat-entry bot";
+      const icon = document.createElement("div");
+      icon.className = "icon";
+      icon.textContent = "🤖";
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+      botEntry.appendChild(icon);
+      botEntry.appendChild(bubble);
+      chatLog.appendChild(botEntry);
+      chatLog.scrollTop = chatLog.scrollHeight;
 
       const typing = setInterval(() => {
         if (i < text.length) {
-          div.innerHTML += text.charAt(i);
+          bubble.textContent += text.charAt(i);
           chatLog.scrollTop = chatLog.scrollHeight;
           i++;
         } else {
           clearInterval(typing);
         }
-      }, 5);
+      }, 10);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
     }
   </script>
 </body>
