@@ -7,6 +7,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -17,11 +18,64 @@
     }
     header {
       background-color: #4e9cd9;
-      padding: 20px;
-      text-align: center;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    header img {
-      width: 60px;
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #4e9cd9;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      nav ul.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
     }
     .hero {
       text-align: center;
@@ -96,7 +150,21 @@
 </head>
 <body>
   <header>
-    <img src="/favicon.ico" alt="Sparsom logo">
+    <div class="logo">
+      <img src="/favicon.ico" alt="Sparsom logo">
+      <strong>Sparsom</strong>
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Hjem</a></li>
+        <li><a href="#">Om oss</a></li>
+        <li><a href="#">Les mer</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section class="hero" id="hero">
