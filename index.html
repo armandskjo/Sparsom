@@ -27,13 +27,8 @@
       top: 0;
       z-index: 1000;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
     .logo img {
-      height: 40px;
-      margin-right: 10px;
+      height: 60px;
     }
     .menu-toggle {
       display: none;
@@ -151,8 +146,7 @@
 <body>
   <header>
     <div class="logo">
-      <img src="/favicon.ico" alt="Sparsom logo">
-      <strong>Sparsom</strong>
+      <img src="/sparsom_logo_full.png" alt="Sparsom logo">
     </div>
     <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">
       <span></span><span></span><span></span>
@@ -198,7 +192,6 @@
   </footer>
 
   <script>
-    // Fade-in animasjon på scroll
     const hero = document.getElementById('hero');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -207,7 +200,6 @@
         }
       });
     }, { threshold: 0.1 });
-
     observer.observe(hero);
   </script>
 </body>
