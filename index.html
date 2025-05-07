@@ -74,7 +74,12 @@
     }
     .hero {
       text-align: center;
-      padding: 80px 20px 40px;
+      padding: 100px 20px;
+      background-image: url('/hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
       opacity: 0;
       transform: translateY(40px);
       transition: all 1s ease;
@@ -92,17 +97,19 @@
     .cta-btn {
       display: inline-block;
       margin-top: 30px;
-      background-color: #4e9cd9;
-      color: white;
+      background-color: #ffffff;
+      color: #4e9cd9;
       padding: 14px 28px;
       border: none;
       border-radius: 6px;
       font-size: 16px;
       text-decoration: none;
-      transition: background-color 0.3s ease;
+      font-weight: bold;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     .cta-btn:hover {
-      background-color: #3b8bc3;
+      background-color: #e6f3fc;
+      color: #3b8bc3;
     }
     .features {
       display: flex;
@@ -165,7 +172,6 @@
     <h1>Ta kontroll over økonomien din med Sparsom</h1>
     <p>Din AI-drevne økonomihjelper – personlig, trygg og alltid tilgjengelig.</p>
     <a href="/auth/signin" class="cta-btn">Kom i gang nå</a>
-    <img src="forsidebilde.png" alt="Sparsom illustrasjon">
   </section>
 
   <section class="features">
